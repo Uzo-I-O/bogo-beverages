@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>measurement harness</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #ddd;
+      }
+      iframe {
+        display: block;
+        border: 0;
+        background: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <iframe id="frame"></iframe>
+    <script>
+      const params = new URLSearchParams(location.search);
+      const frame = document.getElementById("frame");
+      frame.src = params.get("src") || "http://localhost:5173/";
+      frame.style.width = (params.get("w") || "1440") + "px";
+      frame.style.height = (params.get("h") || "3000") + "px";
+    </script>
+  </body>
+</html>
