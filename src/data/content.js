@@ -84,3 +84,32 @@ export const updates = [
     href: `${SOURCE_URL}/we-have-just-launched-bogo-is-now-live-2/`,
   },
 ];
+
+export const team = [
+  {
+    title: "Commercial",
+    description:
+      "Our commercial team connects great products with the consumers and occasions they are made for.",
+  },
+  {
+    title: "Brand & Marketing",
+    description:
+      "Our brand builders turn consumer insight into memorable experiences and trusted names.",
+  },
+  {
+    title: "Operations & Distribution",
+    description:
+      "Our operations teams make sure quality products move reliably from our partners to every market.",
+  },
+  {
+    title: "Our Partners",
+    description:
+      "We work with people and businesses who share our ambition to grow quality beverage experiences across Africa.",
+  },
+];
+
+export const contactDetails = {
+  address: "21, Sanusi Fafunwa Street, Victoria Island, Lagos 106104",
+  email: "info@bogobeverages.com",
+  phone: "+234 (0) 1 342 9292",
+};

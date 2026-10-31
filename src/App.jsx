@@ -1,6 +1,12 @@
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
-import { BrandsPage, CompanyPage } from "./components/Pages";
+import {
+  BrandsPage,
+  CompanyPage,
+  ContactPage,
+  TeamPage,
+  UpdatesPage,
+} from "./components/Pages";
 import { About, Brands, Stats, Updates } from "./components/Sections";
 
 export default function App() {
@@ -12,6 +18,18 @@ export default function App() {
 
   if (path === "/brands") {
     return <BrandsPage />;
+  }
+
+  if (path === "/team" || path === "/teams") {
+    return <TeamPage />;
+  }
+
+  if (path === "/updates") {
+    return <UpdatesPage />;
+  }
+
+  if (path === "/contact") {
+    return <ContactPage />;
   }
 
   return (

@@ -3,8 +3,8 @@ import { SOURCE_URL } from "../data/content";
 
 const aboutLinks = [
   { label: "Company", href: "/company/" },
-  { label: "Team", href: `${SOURCE_URL}/teams/` },
-  { label: "Updates", href: `${SOURCE_URL}/updates/` },
+  { label: "Team", href: "/team/" },
+  { label: "Updates", href: "/updates/" },
 ];
 
 export default function Navbar() {
@@ -90,7 +90,7 @@ export default function Navbar() {
             <li className="nav-item">
               <a
                 className="nav-link"
-                href={`${SOURCE_URL}/contact/`}
+                href="/contact/"
                 onClick={closeMenus}
               >
                 Contact
