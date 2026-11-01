@@ -8,6 +8,24 @@ import {
   UpdatesPage,
 } from "./components/Pages";
 import { About, Brands, Stats, Updates } from "./components/Sections";
+import useScrollReveal from "./hooks/useScrollReveal";
+
+function LandingPage() {
+  useScrollReveal();
+
+  return (
+    <>
+      <Hero />
+      <main>
+        <About />
+        <Stats />
+        <Brands />
+        <Updates />
+      </main>
+      <Footer />
+    </>
+  );
+}
 
 export default function App() {
   const path = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -32,14 +50,5 @@ export default function App() {
     return <ContactPage />;
   }
 
-  return (
-    <>
-      <Hero />
-      <About />
-      <Stats />
-      <Brands />
-      <Updates />
-      <Footer />
-    </>
-  );
+  return <LandingPage />;
 }

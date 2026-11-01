@@ -1,16 +1,23 @@
 import { brands, SOURCE_URL, updates } from "../data/content";
 
+const revealDelay = (ms) => ({ "--reveal-delay": `${ms}ms` });
+
 export function About() {
   return (
     <section id="about" className="about">
       <div className="container">
         <div className="row">
           <div className="col-md-8 about-copy">
-            <h2>INNOVATION | EXPERIENCE | AMBITION</h2>
-            <p className="short-desc">
+            <h2 data-reveal>INNOVATION | EXPERIENCE | AMBITION</h2>
+            <p className="short-desc" data-reveal style={revealDelay(120)}>
               Bogo is unlocking new possibilities in Africa.
             </p>
-            <a href={`${SOURCE_URL}/about-us/`} className="btn btn-white">
+            <a
+              href={`${SOURCE_URL}/about-us/`}
+              className="btn btn-white"
+              data-reveal
+              style={revealDelay(240)}
+            >
               Learn More
             </a>
           </div>
@@ -31,8 +38,13 @@ export function Stats() {
     <section className="stats">
       <div className="container">
         <div className="row">
-          {stats.map((stat) => (
-            <div className="col-md-4 stats-col" key={stat.label}>
+          {stats.map((stat, index) => (
+            <div
+              className="col-md-4 stats-col"
+              key={stat.label}
+              data-reveal
+              style={revealDelay(index * 120)}
+            >
               <img src={stat.icon} alt="" />
               <h3>{stat.label}</h3>
             </div>
@@ -48,7 +60,7 @@ export function Brands() {
     <section className="brands">
       <div className="container">
         <div className="row">
-          <div className="col-md-3 brands-intro">
+          <div className="col-md-3 brands-intro" data-reveal>
             <h3>Our Brands</h3>
             <p className="brand-desc">
               An impressive portfolio of world-renowned names and emerging
@@ -59,8 +71,13 @@ export function Brands() {
             </a>
           </div>
 
-          {brands.map((brand) => (
-            <div className="col-md-3 brand-col" key={brand.title}>
+          {brands.map((brand, index) => (
+            <div
+              className="col-md-3 brand-col"
+              key={brand.title}
+              data-reveal
+              style={revealDelay(100 + index * 120)}
+            >
               <div className="brand-container">
                 <div className="brand-img-container">
                   <img
@@ -96,14 +113,19 @@ export function Updates() {
     <section className="updates">
       <div className="container">
         <div className="row updates-heading-row">
-          <div className="col-12">
+          <div className="col-12" data-reveal>
             <h4>Latest Updates</h4>
           </div>
         </div>
 
         <div className="row">
-          {updates.map((update) => (
-            <div className="col-md-4 update-col" key={update.title}>
+          {updates.map((update, index) => (
+            <div
+              className="col-md-4 update-col"
+              key={update.title}
+              data-reveal
+              style={revealDelay(index * 120)}
+            >
               <div className="updates-container">
                 <img
                   src={update.image}
