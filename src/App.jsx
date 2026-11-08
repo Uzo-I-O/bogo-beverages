@@ -1,5 +1,6 @@
 import Hero from "./components/Hero";
 import Footer from "./components/Footer";
+import BottlePour from "./components/BottlePour";
 import {
   BrandsPage,
   CompanyPage,
@@ -17,6 +18,7 @@ function LandingPage() {
     <>
       <Hero />
       <main>
+        <BottlePour />
         <About />
         <Stats />
         <Brands />

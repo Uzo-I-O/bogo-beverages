@@ -8,7 +8,7 @@ Local stack: Vite 5, React 18, hand-authored CSS (no copied WordPress/Elementor 
 
 | Local | Source | File owner |
 | --- | --- | --- |
-| `/` | `/` | `src/App.jsx`, `Hero.jsx`, `Sections.jsx`, `Footer.jsx` |
+| `/` | `/` | `src/App.jsx`, `Hero.jsx`, `BottlePour.jsx`, `Sections.jsx`, `Footer.jsx` |
 | `/company/`, `/about-us/` | `/about-us/` | `src/components/Pages.jsx` (`CompanyPage`) |
 | `/brands/` | `/brands/` | `src/components/Pages.jsx` (`BrandsPage`) |
 | `/team/`, `/teams/` | `/team/` | `src/components/Pages.jsx` (`TeamPage`) |
@@ -27,6 +27,9 @@ Those links remain absolute URLs to the source and open externally.
 5. Brands band: 370 px tall black panel, intro column plus three 400 px cards.
 6. Latest Updates: heading plus three image cards linking to source stories.
 7. Footer: Company, Career, Links, Connect with us; social icon rows.
+
+A scroll-driven bottle fill is rendered as a fixed background layer behind
+sections 3–6; it is not a separate section and does not add page height.
 
 ## Typography and tokens
 
@@ -97,7 +100,8 @@ All source assets are local under `public/images` and `public/fonts`:
 
 ## Motion implementation
 
-CSS keyframes plus one `IntersectionObserver` hook; no animation library.
+CSS keyframes plus one `IntersectionObserver` hook for the original clone motion,
+and GSAP 3 + ScrollTrigger for the scroll-driven bottle background.
 
 - Logo fade-down: 0.8 s, 0.1 s delay.
 - Nav items fade-down in sequence: 0.22 s, 0.32 s, 0.42 s delays.
@@ -108,9 +112,40 @@ CSS keyframes plus one `IntersectionObserver` hook; no animation library.
   `revealUp`, threshold 0.15, `rootMargin: 0px 0px -40px 0px`, unobserved after reveal.
 - Hover accents: 6 px card lift, 1.05 image zoom, 4 px arrow slide, 5 px stats icon
   float, 3 px button lift and gold fill.
-- `prefers-reduced-motion: reduce` disables entrance/reveal animation, hover
-  transforms, transitions, and smooth scrolling.
-- `<noscript>` styles keep reveal content visible when JavaScript is unavailable.
+
+### Scroll-driven bottle background
+
+`src/components/BottlePour.jsx` and the `.bottle-bg` / `.pour-*` rules in
+`src/styles.css`:
+
+- The bottle is a fixed, `aria-hidden` background layer. It is the first child of
+  the landing `<main>` but is not a section, adds no page height, and has
+  `pointer-events: none`.
+- Inline SVG bottle (`viewBox="0 0 320 760"`) with no bottle image request. A
+  `clipPath` based on the cavity keeps every liquid layer inside the glass.
+- One GSAP timeline with `ScrollTrigger`: trigger `main`, `start: "top top"`,
+  `end: "bottom bottom"`, `scrub: true`, `invalidateOnRefresh: true`. There is no
+  pin. A `ResizeObserver` refreshes the trigger when loaded images or layout
+  change the main content height.
+- Normalized progress is written to `--pour-progress`; scroll velocity feeds a
+  smoothed `--pour-slosh` value (1 to 1.4) from a `gsap.ticker` callback.
+- The liquid group is translated from `y: 712` (wave crest on the cavity floor,
+  empty) to `y: 0` (full). The scroll timeline only animates transforms.
+- Two 640-unit-wide wave paths (160-unit period) loop from `x: 0` to `x: -320`
+  over 6.4 s and 9.6 s with different opacities. `--pour-slosh` scales them
+  vertically via `scaleY`, then eases back to 1 when scrolling stops.
+- Seven small bubbles use a lightweight CSS `pourBubbleRise` keyframe inside the
+  clipped liquid group.
+- Near the end of the scrub the label brightens and a clipped light sweep crosses
+  the glass. All tween positions stay within 0–1 so progress 1 resolves the state.
+- Layering keeps the fill visible without covering copy: the fixed bottle is at
+  `z-index: 1`, section and card backgrounds paint below it, and headings,
+  paragraphs, links, and card labels are raised to `z-index: 2`. The hero and
+  footer sit at `z-index: 2` and cover the layer outside the landing sections.
+- The stage is right-aligned on desktop (`26vw`, capped at 430 px, 45% opacity),
+  reduced to 34% below 992 px, and centred at 24% opacity below 768 px.
+- `prefers-reduced-motion: reduce` sets the bottle full and label bright, then
+  disables the scroll fill, wave loops, sweep, bubble motion, and glow animation.
 
 ## Comparison and checks
 
@@ -128,7 +163,17 @@ Checks run:
   a `main` landmark for the content between the hero and footer.
 - No console errors on the landing page.
 - All 14 `[data-reveal]` elements reveal after a full scroll at 390/800/1440.
-- No horizontal overflow at tested widths.
+- No horizontal overflow at tested widths (320×568, 390×844, 775×518, 844×390,
+  1440×900). The fixed bottle stage remains inside the viewport.
+- Bottle fill checked at 390×844 and 1440×900: progress 0 → liquid `y: 712`
+  (empty), 0.5 → half raised, 1 → liquid at `y: 0`, label bright, sweep passed.
+  The fill range matches `main` from `top top` to `bottom bottom`; no pin spacer
+  is added.
+- The bottle was confirmed to paint above the Brands band and brand cards while
+  headings, card labels, and links stay above it.
+- Reduced-motion branch checked with a temporary `matchMedia` override: full
+  bottle and static wave transforms. CSS also removes bubble motion and the
+  sweep under the real media query.
 - Hover states confirmed through real pointer input: brand card lift/image zoom/
   arrow slide, update card lift/image zoom, and button lift/gold fill.
 - Mobile menu and dropdown interactions previously confirmed.

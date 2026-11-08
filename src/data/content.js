@@ -9,14 +9,14 @@ export const brands = [
   },
   {
     title: "Sparkling Wines",
-    image: "/images/bottega-img.png",
+    image: "/images/bottega-portfolio.png",
     imageAlt: "Bottega sparkling wine bottle",
     href: `${SOURCE_URL}/brands/sparkling-wines/`,
   },
   {
     title: "Spirits",
-    image: "/images/image-13.png",
-    imageAlt: "Spirits bottle",
+    image: "/images/grace-portfolio.png",
+    imageAlt: "Grace O'Malley Irish whiskey bottle",
     href: `${SOURCE_URL}/brands/spirits/`,
   },
 ];

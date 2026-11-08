@@ -45,16 +45,27 @@ The landing page adds motion without changing the source layout:
   driven by one `IntersectionObserver` (`src/hooks/useScrollReveal.js`).
 - Hover accents: card lift, image zoom, arrow slide, stats icon float, and button lift.
 - Smooth anchor scrolling.
+- Scroll-driven bottle background across the landing sections. A fixed,
+  `aria-hidden` inline-SVG bottle sits behind the About, Stats, Brands, and
+  Updates content. One GSAP timeline with a `ScrollTrigger` (`scrub: true`, no
+  pin) raises the liquid from empty to full as the main content scrolls from top
+  to bottom. The liquid is clipped to the bottle cavity; two looping waves form
+  the surface, rising bubbles add depth, and the label glow and a brief light
+  sweep resolve near the end. Wave amplitude reacts to scroll velocity and
+  settles when scrolling stops. Section and card backgrounds remain behind the
+  bottle, while headings, paragraphs, and links stay above it for legibility.
 
-All motion is disabled or reduced under `prefers-reduced-motion: reduce`, and a
-`<noscript>` fallback keeps reveal content visible without JavaScript.
+All motion is reduced under `prefers-reduced-motion: reduce`. In reduced-motion
+mode the bottle is shown full immediately, wave and bubble motion is disabled,
+and there is no scroll-driven fill. A `<noscript>` fallback keeps reveal content
+visible without JavaScript.
 
 ## Structure
 
 ```text
 src/
   App.jsx                  route selection and landing page wrapper
-  components/              Hero, Navbar, Sections, Footer, inner pages
+  components/              Hero, Navbar, BottlePour, Sections, Footer, inner pages
   data/content.js          copy, brand/update data, outbound source URLs
   hooks/useScrollReveal.js scroll-reveal observer
   styles.css               shared layout, page styles, motion
@@ -63,11 +74,20 @@ public/
   images/                  local copies of source images, SVGs, and the hero GIF
 ```
 
+The scroll-driven bottle uses [`gsap`](https://gsap.com/) and its `ScrollTrigger`
+plugin (`npm install` installs both from the existing dependency).
+
 ## Checks
 
 - `npm run build` passes.
 - Lighthouse accessibility and best-practices scores are 1.0.
-- Responsive checks at 390, 800, and 1440 px widths show no horizontal overflow.
+- Responsive checks at 320×568, 390×844, 775×518, 844×390, and 1440×900 show
+  no horizontal overflow; the fixed bottle stays within the viewport.
+- Bottle progress was checked against the main-content scroll range: at 0 the
+  liquid is empty, at 0.5 it is half raised, and at 1 the liquid reaches `y: 0`,
+  the label is bright, and the light sweep has passed.
+- The reduced-motion branch was checked with a temporary `matchMedia` override:
+  the bottle renders full and waves stay static.
 - All 14 scroll-reveal targets become visible after scrolling through the page.
 - Hero entrance, scroll arrow, brand/update card lift, image zoom, arrow slide, and
   button hover states were exercised in the browser.
