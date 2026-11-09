@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
 
 const heroProducts = [
@@ -19,8 +20,34 @@ const heroProducts = [
 ];
 
 export default function Hero() {
+  const heroRef = useRef(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      setIsInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.15 }
+    );
+
+    observer.observe(hero);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className="home">
+    <header ref={heroRef} className={`home${isInView ? " is-in-view" : ""}`}>
       <Navbar />
 
       <div className="hero-atmosphere" aria-hidden="true">

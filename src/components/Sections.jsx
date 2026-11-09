@@ -26,8 +26,15 @@ export function About() {
           </div>
           <div className="about-copy">
             <p className="section-kicker" data-reveal>Designed for the way Africa drinks</p>
-            <h2 data-reveal>Good taste is a <em>way of life.</em></h2>
-            <p className="short-desc" data-reveal style={revealDelay(120)}>
+            <h2 data-reveal data-reveal-repeat>
+              Good taste is a <em>way of life.</em>
+            </h2>
+            <p
+              className="short-desc"
+              data-reveal
+              data-reveal-repeat
+              style={revealDelay(120)}
+            >
               We bring together trusted expertise, bold thinking and a portfolio
               of premium beverages built for memorable moments.
             </p>
@@ -35,6 +42,7 @@ export function About() {
               href="/company/"
               className="btn btn-white"
               data-reveal
+              data-reveal-repeat
               style={revealDelay(240)}
             >
               Learn More
@@ -80,7 +88,7 @@ export function Stats() {
         scrollTrigger: {
           trigger: statement,
           start: "top 82%",
-          once: true,
+          toggleActions: "restart reverse restart reverse",
         },
       });
     }, statement);

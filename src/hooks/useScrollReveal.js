@@ -21,9 +21,15 @@ export default function useScrollReveal() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+          const repeats = entry.target.hasAttribute("data-reveal-repeat");
+
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            if (!repeats) observer.unobserve(entry.target);
+            return;
+          }
+
+          if (repeats) entry.target.classList.remove("is-visible");
         });
       },
       { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }

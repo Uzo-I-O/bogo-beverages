@@ -455,7 +455,16 @@ img {
 }
 
 .home .header-title {
-  animation: moveInLeft 2s ease-out 0.1s both;
+  opacity: 0;
+  transform: translateX(-10rem);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.home.is-in-view .header-title {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .hero-row {
@@ -562,6 +571,8 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .home .header-title {
     animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
