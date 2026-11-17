@@ -54,6 +54,26 @@ export function About() {
   );
 }
 
+export function PortfolioShowcase() {
+  return (
+    <section className="portfolio-showcase">
+      <div className="container">
+        <div className="portfolio-showcase-heading">
+          <p className="section-kicker">A portfolio with presence</p>
+          <h2>Made to be <em>noticed.</em></h2>
+        </div>
+        <figure className="portfolio-showcase-figure">
+          <img
+            src="/images/product-display.jpg"
+            alt="A display of Bogo's premium beverage products"
+          />
+          <figcaption>Premium pours, presented with purpose.</figcaption>
+        </figure>
+      </div>
+    </section>
+  );
+}
+
 const stats = [
   { icon: "/images/globe.svg", label: "4 Countries" },
   { icon: "/images/award.svg", label: "150+ Premium Brands" },

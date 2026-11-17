@@ -8,7 +8,13 @@ import {
   TeamPage,
   UpdatesPage,
 } from "./components/Pages";
-import { About, Brands, Stats, Updates } from "./components/Sections";
+import {
+  About,
+  Brands,
+  PortfolioShowcase,
+  Stats,
+  Updates,
+} from "./components/Sections";
 import useScrollReveal from "./hooks/useScrollReveal";
 
 function LandingPage() {
@@ -20,6 +26,7 @@ function LandingPage() {
       <main>
         <BottlePour />
         <About />
+        <PortfolioShowcase />
         <Stats />
         <Brands />
         <Updates />
