@@ -1,6 +1,11 @@
-import Hero from "./components/Hero";
+import { useEffect } from "react";
 import Footer from "./components/Footer";
-import BottlePour from "./components/BottlePour";
+import IntroPour from "./components/motion/IntroPour";
+import GlobeHero from "./components/motion/GlobeHero";
+import StatsPinned from "./components/motion/StatsPinned";
+import BrandsScene from "./components/motion/BrandsScene";
+import UpdatesStrip from "./components/motion/UpdatesStrip";
+import { startMotion } from "./motion/engine";
 import {
   BrandsPage,
   CompanyPage,
@@ -8,30 +13,23 @@ import {
   TeamPage,
   UpdatesPage,
 } from "./components/Pages";
-import {
-  About,
-  Brands,
-  PortfolioShowcase,
-  Stats,
-  Updates,
-} from "./components/Sections";
-import useScrollReveal from "./hooks/useScrollReveal";
 
 function LandingPage() {
-  useScrollReveal();
+  useEffect(() => startMotion(), []);
 
   return (
     <>
-      <Hero />
-      <main>
-        <BottlePour />
-        <About />
-        <PortfolioShowcase />
-        <Stats />
-        <Brands />
-        <Updates />
+      <main className="mh">
+        <IntroPour />
+        <GlobeHero />
+        <div className="mh-hz" id="mh-hz" aria-hidden="true" />
+        <StatsPinned />
+        <BrandsScene />
+        <UpdatesStrip />
       </main>
-      <Footer />
+      <div className="mh-foot">
+        <Footer />
+      </div>
     </>
   );
 }

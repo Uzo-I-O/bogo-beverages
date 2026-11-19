@@ -1,0 +1,1249 @@
+/* Bogo landing — globe hero, gold horizon glow, pinned stats, bottle scrub scene.
+   Everything is scoped under .mh so the inner pages keep styles.css untouched. */
+
+@font-face {
+  font-family: "Anton";
+  src: url("../assets/fonts/anton-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../assets/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2");
+  font-weight: 400 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+html.mhp {
+  overflow-x: visible;
+  scroll-behavior: auto;
+}
+
+html.mhp body {
+  overflow-x: clip;
+  background: #fff;
+}
+
+.mh {
+  --ink: #111111;
+  --gold: #cc8f1b;
+  --gold-deep: #b67700;
+  --gold-hi: #ffc700;
+  --muted: #5d6270;
+  --muted2: #6b6f78;
+  --wash: #fbf3e2;
+  --hair: #e3ddd2;
+  --giant: #1e1b16;
+  --display: "Anton", Impact, sans-serif;
+  --body: "Poppins", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
+  position: relative;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.mh *,
+.mh *::before,
+.mh *::after {
+  box-sizing: border-box;
+}
+
+.mh h1,
+.mh h2,
+.mh h3,
+.mh p,
+.mh ul,
+.mh li {
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-transform: none;
+  list-style: none;
+}
+
+.mh a,
+.mh a:hover {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+/* ---------- entrance guard ---------- */
+html.js-anim .mh .ent {
+  opacity: 0;
+}
+
+html.anim-done .mh .ent {
+  opacity: 1;
+}
+
+.mh .mh-ln {
+  display: block;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+/* ================= 1. GLOBE HERO ================= */
+.mh-hwrap {
+  position: relative;
+}
+
+.mh-hero {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: #fff;
+}
+
+html.sticky .mh-hero {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.mh-gwrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.mh-globe {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mh-hf {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: var(--hf-top, 0px);
+  width: calc(1440 * var(--uc));
+  height: calc(900 * var(--uc));
+}
+
+.mh .mh-logo {
+  position: absolute;
+  left: calc(40 * var(--uc));
+  top: calc(36 * var(--uc));
+  width: calc(150 * var(--uc));
+  display: block;
+}
+
+.mh-logo-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mh .mh-vnav {
+  position: absolute;
+  left: calc(218 * var(--uc));
+  top: calc(77 * var(--uc));
+}
+
+.mh .mh-vnav-link {
+  display: block;
+  padding: calc(6.1 * var(--uc)) 0;
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: max(calc(13 * var(--uc)), 11px);
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.25s;
+}
+
+.mh .mh-vnav-link:hover {
+  color: var(--gold-deep);
+}
+
+.mh-copy {
+  position: absolute;
+  left: calc(218 * var(--uc));
+  top: calc(294 * var(--uc));
+  width: calc(560 * var(--uc));
+}
+
+.mh .mh-overline {
+  font-weight: 700;
+  font-size: max(calc(19.2 * var(--uc)), 12px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--gold-deep);
+}
+
+.mh .mh-hl {
+  margin-top: calc(7 * var(--uc));
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(114.3 * var(--uc));
+  line-height: 0.953;
+  letter-spacing: -0.004em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.mh .mh-lede {
+  margin-top: calc(21 * var(--uc));
+  max-width: max(calc(430 * var(--uc)), 250px);
+  font-size: max(calc(18.2 * var(--uc)), 13px);
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.mh-btns {
+  margin-top: calc(19 * var(--uc));
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(15 * var(--uc));
+}
+
+.mh .mh-btn {
+  display: inline-flex;
+  align-items: center;
+  height: max(calc(40 * var(--uc)), 34px);
+  padding: 0 max(calc(25 * var(--uc)), 16px);
+  border-radius: 999px;
+  border: 1.3px solid var(--gold);
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: max(calc(12 * var(--uc)), 11px);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+}
+
+.mh .mh-btn-fill {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+.mh .mh-btn-fill:hover {
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
+  color: #fff;
+}
+
+.mh .mh-btn-line {
+  background: transparent;
+  color: var(--gold-deep);
+}
+
+.mh .mh-btn-line:hover {
+  background: var(--gold);
+  color: var(--ink);
+}
+
+/* ================= 2. HORIZON GLOW ================= */
+.mh-hz {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  display: none;
+}
+
+/* ================= 3. STATS ================= */
+.mh-stats {
+  position: relative;
+  z-index: 3;
+  background: transparent;
+}
+
+.mh-pin {
+  position: sticky;
+  top: min(0px, calc(var(--vh) - 900 * var(--us)));
+  height: calc(900 * var(--us));
+  z-index: 1;
+}
+
+.mh-ph {
+  position: absolute;
+  left: calc(64 * var(--us));
+  top: calc(93 * var(--us));
+  width: calc(440 * var(--us));
+  height: calc(236 * var(--us));
+  overflow: hidden;
+  background: #2a1a0c;
+}
+
+.mh-ph-img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.mh .mh-big {
+  position: absolute;
+  left: calc(64 * var(--us));
+  top: calc(383 * var(--us));
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: calc(105 * var(--us));
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.mh-col {
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-900 * var(--us));
+  height: calc((371 + 4 * 166 + 140) * var(--us));
+}
+
+.mh-intro {
+  position: absolute;
+  left: calc(594 * var(--us));
+  top: calc(117 * var(--us));
+  width: calc(440 * var(--us));
+  font-size: max(calc(17.9 * var(--us)), 12.5px);
+  line-height: 1.36;
+  color: var(--muted2);
+}
+
+.mh .mh-intro-p + .mh-intro-p {
+  margin-top: calc(24 * var(--us));
+}
+
+.mh-intro-links {
+  margin-top: calc(22 * var(--us));
+  display: flex;
+  gap: calc(26 * var(--us));
+}
+
+.mh .mh-intro-link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+  transition: color 0.25s;
+}
+
+.mh .mh-intro-link:hover {
+  color: var(--gold-deep);
+  text-decoration: underline;
+}
+
+.mh .mh-nums {
+  position: absolute;
+  left: calc(993 * var(--us));
+  top: calc(371 * var(--us));
+  width: calc(384 * var(--us));
+}
+
+@property --hl {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.mh .mh-num {
+  position: relative;
+  height: calc(166 * var(--us));
+  --hl: 1;
+}
+
+.mh .mh-num + .mh-num::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(-16 * var(--us));
+  height: 1px;
+  background: var(--hair);
+  transform: scaleX(var(--hl));
+  transform-origin: 0 50%;
+}
+
+.mh-n {
+  display: block;
+  font-family: var(--display);
+  font-size: calc(82 * var(--us));
+  line-height: 1;
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.mh-c {
+  display: block;
+  margin-top: calc(6 * var(--us));
+  font-size: max(calc(17 * var(--us)), 11.5px);
+  color: var(--muted2);
+}
+
+/* ================= 4. BRANDS SCRUB SCENE ================= */
+.mh-track {
+  position: relative;
+  z-index: 4;
+  background: #000;
+}
+
+.mh-scene {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100lvh;
+  overflow: hidden;
+  background: #000;
+  --edge-px: 70vh;
+  --ph: 0;
+}
+
+.mh-spot {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mh-band-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--edge-px);
+  bottom: 0;
+  background: #0d0b08;
+  box-shadow: 0 -1px 0 rgba(204, 143, 27, 0.45);
+}
+
+.mh-giant {
+  position: absolute;
+  left: 0;
+  top: calc(var(--edge-px) - 264 * var(--u));
+  font-family: var(--display);
+  font-size: calc(330 * var(--u));
+  line-height: 0.8;
+  color: var(--giant);
+  white-space: nowrap;
+  text-transform: uppercase;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.mh-bottle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.mh-readout {
+  position: absolute;
+  left: calc(26 * var(--u));
+  top: calc(52 * var(--u));
+  display: flex;
+  gap: 1.6em;
+  font-family: var(--mono);
+  font-size: calc(10.5 * var(--u));
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.72);
+  font-variant-numeric: tabular-nums;
+}
+
+.mh-readout-speed {
+  opacity: var(--ph);
+  transition: opacity 0.5s;
+}
+
+.mh-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: var(--edge-px);
+  bottom: 0;
+  color: #fff;
+}
+
+.mh-strip {
+  position: absolute;
+  left: 0;
+  top: calc(76 * var(--u));
+  display: flex;
+  align-items: flex-start;
+  gap: calc(120 * var(--u));
+  will-change: transform;
+}
+
+.mh-lead {
+  display: flex;
+  gap: calc(64 * var(--u));
+  flex: none;
+}
+
+.mh .mh-lead-hl {
+  font-family: var(--display);
+  font-size: calc(64 * var(--u));
+  line-height: 0.98;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #fff;
+}
+
+.mh-lead-ln {
+  display: block;
+}
+
+.mh-lead-ln-gold {
+  color: var(--gold);
+}
+
+.mh-lead-copy {
+  width: calc(250 * var(--u));
+  flex: none;
+}
+
+.mh .mh-lead-p {
+  font-size: calc(12 * var(--u));
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.mh .mh-lead-p + .mh-lead-p {
+  margin-top: 1em;
+}
+
+.mh .mh-card {
+  display: block;
+  flex: none;
+  width: calc(270 * var(--u));
+  padding: 0 calc(30 * var(--u));
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+  --s: -40%;
+}
+
+.mh-lead + .mh-card {
+  border-left: 0;
+}
+
+.mh-card-icon {
+  display: block;
+  width: calc(38 * var(--u));
+  height: calc(38 * var(--u));
+}
+
+.mh .mh-sweep {
+  background-image: linear-gradient(
+    90deg,
+    #fff calc(var(--s) - 34%),
+    var(--gold-hi) calc(var(--s) - 6%),
+    rgba(204, 143, 27, 0) calc(var(--s) + 26%)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.mh .mh-card-title {
+  margin-top: calc(22 * var(--u));
+  font-family: var(--display);
+  font-size: calc(26 * var(--u));
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.mh .mh-card-body {
+  margin-top: calc(14 * var(--u));
+  font-size: calc(12.4 * var(--u));
+  line-height: 1.5;
+}
+
+.mh .mh-pill {
+  position: absolute;
+  left: 50%;
+  bottom: calc(36 * var(--u));
+  padding: calc(11 * var(--u)) calc(22 * var(--u));
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: calc(10 * var(--u));
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  white-space: nowrap;
+  opacity: var(--ph);
+  transform: translate(-50%, calc((1 - var(--ph)) * 24px));
+  transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), background-color 0.25s,
+    color 0.25s;
+}
+
+.mh .mh-pill:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--ink);
+}
+
+/* ================= 5. UPDATES ================= */
+.mh-updates {
+  position: relative;
+  z-index: 5;
+  background: #fff;
+  padding: calc(120 * var(--us)) calc(64 * var(--us)) calc(140 * var(--us));
+}
+
+.mh-up-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.mh .mh-up-over {
+  order: 2;
+  font-family: var(--mono);
+  font-size: max(calc(13 * var(--us)), 11px);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.mh .mh-up-hl {
+  font-family: var(--display);
+  font-size: calc(105 * var(--us));
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.mh-up-grid {
+  margin-top: calc(64 * var(--us));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(32 * var(--us));
+}
+
+.mh .mh-up-card {
+  display: block;
+  border-top: 1px solid var(--hair);
+  padding-top: calc(18 * var(--us));
+}
+
+.mh-up-ph {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 900 / 716;
+  background: #2a1a0c;
+}
+
+.mh-up-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.mh .mh-up-card:hover .mh-up-img {
+  transform: scale(1.05);
+}
+
+.mh-up-date {
+  display: block;
+  margin-top: calc(18 * var(--us));
+  font-family: var(--mono);
+  font-size: max(calc(12 * var(--us)), 11px);
+  letter-spacing: 0.09em;
+  color: var(--gold-deep);
+}
+
+.mh-up-title {
+  display: block;
+  margin-top: 6px;
+  font-size: max(calc(20 * var(--us)), 16px);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  transition: color 0.25s;
+}
+
+.mh .mh-up-card:hover .mh-up-title {
+  color: var(--gold-deep);
+}
+
+.mh-foot {
+  position: relative;
+  z-index: 5;
+  overflow-x: clip;
+}
+
+/* ================= PORTRAIT (phones + portrait tablets) ================= */
+html.m-port .mh-hero {
+  height: auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+html.m-port .mh-hf {
+  position: relative;
+  top: 0;
+  width: auto;
+  height: auto;
+  padding: 22px 22px 0;
+}
+
+html.m-port .mh .mh-logo {
+  position: static;
+  width: 120px;
+}
+
+html.m-port .mh .mh-vnav {
+  position: absolute;
+  left: auto;
+  right: 22px;
+  top: 20px;
+  text-align: right;
+}
+
+html.m-port .mh .mh-vnav-link {
+  padding: 4px 0;
+  font-size: 12px;
+}
+
+html.m-port .mh-copy {
+  position: static;
+  width: auto;
+  margin-top: clamp(44px, 9vh, 96px);
+}
+
+html.m-port .mh .mh-overline {
+  font-size: 14px;
+}
+
+html.m-port .mh .mh-hl {
+  margin-top: 12px;
+  font-size: min(18.6vw, 150px);
+}
+
+html.m-port .mh .mh-lede {
+  margin-top: 20px;
+  font-size: 15px;
+  max-width: 420px;
+}
+
+html.m-port .mh-btns {
+  margin-top: 22px;
+  gap: 10px;
+}
+
+html.m-port .mh .mh-btn {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 11px;
+}
+
+html.m-port .mh-gwrap {
+  position: relative;
+  inset: auto;
+  height: 98vw;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(#000 72%, transparent);
+  mask-image: linear-gradient(#000 72%, transparent);
+}
+
+/* ---------- stacked stats (portrait + short landscape) ---------- */
+html.m-port .mh-stats,
+html.m-land .mh-stats {
+  padding: 56px 22px 72px;
+  display: flex;
+  flex-direction: column;
+}
+
+html.m-port .mh-pin,
+html.m-port .mh-col,
+html.m-land .mh-pin,
+html.m-land .mh-col {
+  display: contents;
+}
+
+html.m-port .mh-ph,
+html.m-land .mh-ph {
+  position: relative;
+  left: auto;
+  top: auto;
+  order: 1;
+  width: 100%;
+  max-width: 620px;
+  height: auto;
+  aspect-ratio: 440 / 236;
+}
+
+html.m-port .mh-intro,
+html.m-land .mh-intro {
+  position: static;
+  order: 2;
+  width: auto;
+  max-width: 520px;
+  margin-top: 28px;
+  font-size: 15px;
+}
+
+html.m-port .mh .mh-big,
+html.m-land .mh .mh-big {
+  position: static;
+  order: 3;
+  margin-top: 48px;
+  font-size: min(15.5vw, 120px);
+}
+
+html.m-port .mh .mh-nums,
+html.m-land .mh .mh-nums {
+  position: static;
+  order: 4;
+  width: auto;
+  margin-top: 44px;
+}
+
+html.m-port .mh .mh-num,
+html.m-land .mh .mh-num {
+  height: auto;
+  padding: 18px 0;
+}
+
+html.m-port .mh .mh-num::before,
+html.m-land .mh .mh-num::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--hair);
+  transform: scaleX(var(--hl));
+  transform-origin: 0 50%;
+}
+
+html.m-port .mh-n,
+html.m-land .mh-n {
+  font-size: min(19vw, 100px);
+}
+
+html.m-port .mh-c,
+html.m-land .mh-c {
+  font-size: 14px;
+}
+
+html.m-port .mh-intro-p + .mh-intro-p,
+html.m-land .mh-intro-p + .mh-intro-p {
+  margin-top: 16px;
+}
+
+html.m-port .mh-intro-links,
+html.m-land .mh-intro-links {
+  margin-top: 16px;
+  gap: 22px;
+}
+
+/* ---------- phone framing for the scene ---------- */
+html.m-hp .mh-strip {
+  top: calc(44 * var(--u));
+  gap: calc(56 * var(--u));
+  padding-left: 22px;
+}
+
+html.m-hp .mh-lead {
+  flex-direction: column;
+  gap: calc(22 * var(--u));
+}
+
+html.m-hp .mh .mh-lead-hl {
+  font-size: calc(46 * var(--u));
+}
+
+html.m-hp .mh-lead-copy {
+  width: calc(300 * var(--u));
+}
+
+html.m-hp .mh .mh-lead-p {
+  font-size: calc(13 * var(--u));
+}
+
+html.m-hp .mh .mh-card {
+  width: calc(250 * var(--u));
+}
+
+html.m-hp .mh .mh-card-body {
+  font-size: calc(13 * var(--u));
+}
+
+html.m-hp .mh-readout {
+  left: 20px;
+  top: 22px;
+  font-size: 11px;
+}
+
+html.m-land .mh-strip {
+  top: calc(14 * var(--u));
+  gap: calc(48 * var(--u));
+}
+
+html.m-land .mh-lead {
+  flex-direction: row;
+  gap: calc(28 * var(--u));
+}
+
+html.m-land .mh .mh-lead-hl {
+  font-size: calc(34 * var(--u));
+}
+
+html.m-land .mh-lead-copy {
+  width: calc(230 * var(--u));
+}
+
+html.m-land .mh .mh-lead-p {
+  font-size: max(calc(12 * var(--u)), 10px);
+}
+
+html.m-land .mh .mh-card {
+  width: calc(240 * var(--u));
+}
+
+html.m-land .mh-card-icon {
+  width: calc(30 * var(--u));
+  height: calc(30 * var(--u));
+}
+
+html.m-land .mh .mh-card-title {
+  margin-top: calc(12 * var(--u));
+  font-size: calc(22 * var(--u));
+}
+
+html.m-land .mh .mh-card-body {
+  font-size: max(calc(12 * var(--u)), 10px);
+}
+
+html.m-land .mh .mh-pill {
+  bottom: calc(12 * var(--u));
+}
+
+/* ---------- updates on narrow screens ---------- */
+@media (max-width: 767px) {
+  .mh-updates {
+    padding: 64px 22px 80px;
+  }
+
+  .mh .mh-up-hl {
+    font-size: min(15.5vw, 120px);
+  }
+
+  .mh-up-grid {
+    margin-top: 36px;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html.js-anim .mh .ent {
+    opacity: 1;
+  }
+
+  .mh-readout-speed,
+  .mh .mh-pill {
+    transition: none;
+  }
+}
+
+/* footer email in the display face on the landing page */
+.mh-foot .footer-email {
+  max-width: 100%;
+  font-size: clamp(20px, 6.2vw, 72px);
+  overflow-wrap: anywhere;
+  font-family: "Anton", Impact, sans-serif;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+html.m-land .mh-giant {
+  top: calc(var(--edge-px) - 168 * var(--u));
+  font-size: calc(210 * var(--u));
+}
+
+/* ================= 0. INTRO POUR =================
+   Gold mark flips, the Cavatina bottle rises out of it and pours into a glass,
+   the glass floods the screen gold and the flood lifts off the globe hero.
+   Positions and sizes are set per frame by updateIntro() in engine.js. */
+.mh-ia {
+  position: relative;
+  z-index: 6;
+  height: 100vh;
+  height: 100svh;
+}
+
+.mh-ia-scene {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+}
+
+.mh-ia-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #0d0b08;
+}
+
+.mh-ia-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 55% at 50% 58%, rgba(204, 143, 27, 0.16), rgba(204, 143, 27, 0) 70%),
+    radial-gradient(120% 80% at 50% 120%, rgba(204, 143, 27, 0.12), rgba(204, 143, 27, 0) 60%);
+}
+
+.mh-ia-glow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(255, 214, 140, 0.55), rgba(204, 143, 27, 0.18) 55%, rgba(204, 143, 27, 0) 100%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.mh-ia-sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.mh-ia-spark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: #ffd98a;
+  box-shadow: 0 0 10px 2px rgba(255, 199, 0, 0.55);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.mh-ia-svg,
+.mh-ia-flood {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.mh-ia-flood {
+  z-index: 5;
+}
+
+.mh-ia-glass-fill {
+  fill: rgba(255, 255, 255, 0.045);
+}
+
+.mh-ia-glass-line {
+  fill: none;
+  stroke: rgba(255, 244, 222, 0.62);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+
+.mh-ia-glass-hi {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.5);
+  stroke-linecap: round;
+}
+
+.mh-ia-surface {
+  fill: none;
+  stroke: rgba(255, 240, 200, 0.85);
+  stroke-width: 1.4;
+}
+
+.mh-ia-bubble {
+  fill: rgba(255, 248, 225, 0.75);
+}
+
+.mh-ia-stream,
+.mh-ia-stream-hi {
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+}
+
+.mh-ia-stream {
+  stroke: #e2ad4a;
+}
+
+.mh-ia-stream-hi {
+  stroke: rgba(255, 246, 220, 0.75);
+}
+
+.mh-ia-drop {
+  fill: #f0c56a;
+}
+
+.mh-ia-bottle,
+.mh-ia-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.mh-ia-bottle {
+  z-index: 2;
+}
+
+.mh-ia-logo {
+  z-index: 3;
+}
+
+.mh-ia-bottle img,
+.mh-ia-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.mh-ia-bottle img {
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.55));
+}
+
+.mh-ia-logo-in {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mh-ia-logo img {
+  filter: drop-shadow(0 0 var(--glow, 0px) rgba(255, 199, 0, 0.55));
+}
+
+.mh-ia-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 250, 230, 0.9) 48%,
+    rgba(255, 255, 255, 0) 66%
+  );
+  background-size: 300% 100%;
+  background-position: var(--sheen, 100%) 0;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.mh-ia-brand,
+.mh-ia-cue {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  text-align: center;
+  color: rgba(242, 211, 151, 0.8);
+  pointer-events: none;
+}
+
+.mh .mh-ia-brand,
+.mh .mh-ia-cue {
+  color: rgba(242, 211, 151, 0.8);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.mh-ia-brand {
+  top: 32px;
+}
+
+.mh-ia-cue {
+  bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.mh-ia-cue-line {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: 44px;
+  overflow: hidden;
+  background: rgba(242, 211, 151, 0.18);
+}
+
+.mh-ia-cue-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1px;
+  height: 45%;
+  background: #f2d397;
+  animation: mh-ia-cue 1.8s cubic-bezier(0.6, 0, 0.3, 1) infinite;
+}
+
+@keyframes mh-ia-cue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(230%); }
+}
+
+/* the liquid edge that trails under the scene as it lifts off the hero */
+.mh-ia-edge {
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 0.14);
+  margin-top: -1px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mh-ia-cue-line::after {
+    animation: none;
+    transform: none;
+  }
+}

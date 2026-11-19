@@ -15,6 +15,27 @@
 }
 
 @font-face {
+  font-family: "Anton";
+  src: url("https://fonts.gstatic.com/s/anton/v27/1Ptgg87LROyAm3Kz-C8.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Archivo";
+  src: url("https://fonts.gstatic.com/s/archivo/v25/k3kPo8UDI-1M0wlSV9XAw6lQkqWY8Q82sLydOxI.woff2") format("woff2");
+  font-weight: 400 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("https://fonts.gstatic.com/s/jetbrainsmono/v24/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2") format("woff2");
+  font-weight: 400 500;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Poppins";
   src: url("/fonts/Poppins-Regular.ttf") format("truetype");
   font-weight: 400;
@@ -1322,6 +1343,610 @@ img {
   .pour-halo {
     opacity: 1;
     transform: translate(-50%, -50%);
+  }
+}
+
+/* Bogo network experience */
+.kv-experience {
+  --kv-cobalt: #cc8f1b;
+  --kv-ink: #111;
+  --kv-wash: #fffaf0;
+  overflow: clip;
+  background: #fff;
+  color: var(--kv-ink);
+}
+
+.kv-hwrap {
+  position: relative;
+  height: 165vh;
+}
+
+.kv-hero {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.kv-globe-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.kv-globe {
+  width: 100%;
+  height: 100%;
+}
+
+.kv-hero-copy {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 1440px);
+  height: 100%;
+  margin: 0 auto;
+  padding: 36px 40px;
+}
+
+.kv-mark {
+  display: inline-block;
+  width: 150px;
+  height: auto;
+  color: var(--kv-ink);
+  line-height: 1;
+}
+
+.kv-mark img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: brightness(0);
+}
+
+.kv-mark span,
+.kv-overline,
+.kv-service-lead em {
+  color: var(--kv-cobalt);
+}
+
+.kv-nav {
+  position: absolute;
+  top: 46px;
+  left: clamp(180px, 15vw, 218px);
+  display: flex;
+  gap: 25px;
+}
+
+.kv-nav a,
+.kv-button,
+.kv-stats-scroll a,
+.kv-services-pill {
+  color: var(--kv-ink);
+  font-family: monospace;
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: .1em;
+}
+
+.kv-lede,
+.kv-buttons {
+  opacity: 0;
+  animation: kv-fade-up .8s cubic-bezier(.2,.7,.2,1) forwards;
+}
+
+.kv-lede {
+  animation-delay: .9s;
+}
+
+.kv-buttons {
+  animation-delay: 1.04s;
+}
+
+@keyframes kv-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.kv-nav a:hover,
+.kv-stats-scroll a:hover {
+  color: var(--kv-cobalt);
+}
+
+.kv-copy {
+  position: absolute;
+  top: 32%;
+  left: max(40px, calc((100% - 1440px) / 2 + 218px));
+  width: min(560px, 44vw);
+}
+
+.kv-overline {
+  margin-bottom: 10px;
+  font-size: clamp(1.2rem, 1.35vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: .08em;
+}
+
+.kv-copy h1,
+.kv-stats-pin h2,
+.kv-service-letters,
+.kv-service-lead h2,
+.kv-card h3 {
+  font-family: "Anton", Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: -.02em;
+}
+
+.kv-copy h1 {
+  margin: 0;
+  color: var(--kv-ink);
+  font-size: clamp(6.6rem, 8vw, 11.4rem);
+  line-height: .9;
+  text-transform: uppercase;
+}
+
+.kv-copy h1 span,
+.kv-stats-pin h2 span {
+  display: block;
+}
+
+.kv-copy h1 span {
+  opacity: 0;
+  animation: kv-glitch-in .9s steps(14, end) forwards;
+}
+
+.kv-copy h1 span:nth-child(1) { animation-delay: .26s; }
+.kv-copy h1 span:nth-child(2) { animation-delay: .39s; }
+.kv-copy h1 span:nth-child(3) { animation-delay: .52s; }
+
+@keyframes kv-glitch-in {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateX(-.05em);
+    text-shadow: -.12em 0 rgba(204,143,27,.8), .07em 0 rgba(17,17,17,.25);
+  }
+  45% {
+    opacity: 1;
+    clip-path: inset(0 18% 0 0);
+    transform: translateX(.035em);
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0);
+    transform: none;
+    text-shadow: none;
+  }
+}
+
+.kv-lede {
+  max-width: 420px;
+  margin: 28px 0 24px;
+  color: #5d6270;
+  font-family: "Archivo", system-ui, sans-serif;
+  font-size: clamp(1.4rem, 1.3vw, 1.8rem);
+  line-height: 1.5;
+}
+
+.kv-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.kv-button {
+  padding: 12px 20px;
+  border: 1px solid var(--kv-cobalt);
+  border-radius: 999px;
+  color: var(--kv-cobalt);
+  transition: .25s ease;
+}
+
+.kv-button-fill,
+.kv-button:hover {
+  background: var(--kv-cobalt);
+  color: #fff;
+}
+
+.kv-horizon {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse 90% 72% at 50% 20%, transparent 58%, rgba(255,199,0,.7) 68%, var(--kv-cobalt) 78%, #fff 94%);
+  opacity: .8;
+  transform: translateY(80%);
+}
+
+.kv-stats {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 1fr);
+  min-height: 1550px;
+  padding: 0 max(40px, calc((100vw - 1312px) / 2));
+  background: #fff;
+}
+
+.kv-stats-pin {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  padding-top: 10vh;
+}
+
+.kv-photo {
+  width: min(440px, 85%);
+  aspect-ratio: 440 / 236;
+  background-color: #1d3b44;
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.kv-stats-pin h2 {
+  margin-top: 48px;
+  color: var(--kv-ink);
+  font-size: clamp(5rem, 7.3vw, 10.5rem);
+  line-height: 1;
+}
+
+.kv-stats-scroll {
+  padding-top: 13vh;
+}
+
+.kv-intro {
+  max-width: 440px;
+  color: #6b6f78;
+  font-size: clamp(1.4rem, 1.25vw, 1.8rem);
+  line-height: 1.5;
+}
+
+.kv-intro p + p {
+  margin-top: 24px;
+}
+
+.kv-intro div {
+  display: flex;
+  gap: 26px;
+  margin-top: 22px;
+}
+
+.kv-stats-scroll a {
+  text-decoration: underline;
+  text-underline-offset: .28em;
+}
+
+.kv-numbers {
+  max-width: 384px;
+  margin: 120px 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.kv-numbers li {
+  padding: 28px 0;
+  border-top: 1px solid #d9dbe0;
+}
+
+.kv-numbers strong {
+  display: block;
+  color: var(--kv-cobalt);
+  font-family: Impact, "Arial Narrow", sans-serif;
+  font-size: clamp(5.5rem, 5.7vw, 8.2rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.kv-numbers span {
+  color: #6b6f78;
+  font-size: 1.5rem;
+}
+
+.kv-track {
+  position: relative;
+  z-index: 4;
+  height: 420vh;
+  background: #fff;
+}
+
+.kv-scene {
+  --service-progress: 0;
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.kv-scene::after {
+  position: absolute;
+  top: 90%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background: #111;
+  content: "";
+}
+
+.kv-video {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.kv-service-letters {
+  position: absolute;
+  z-index: 3;
+  top: 35%;
+  left: calc(100% - var(--service-progress) * 145%);
+  color: #e9e9e9;
+  font-size: clamp(12rem, 23vw, 33rem);
+  line-height: .8;
+  mix-blend-mode: darken;
+  white-space: nowrap;
+}
+
+.kv-speed {
+  position: absolute;
+  top: 5.5rem;
+  left: 2.6rem;
+  z-index: 5;
+  color: #111;
+  font-family: monospace;
+  font-size: 1.1rem;
+  letter-spacing: .06em;
+}
+
+.kv-service-band {
+  position: absolute;
+  top: 58%;
+  left: 0;
+  z-index: 4;
+  width: max-content;
+  min-width: 100%;
+  padding: 7rem 5vw 3.6rem;
+  color: #fff;
+  transform: translateX(calc(100vw - var(--service-progress) * 145vw));
+}
+
+.kv-service-strip {
+  display: flex;
+  align-items: flex-start;
+  gap: 7rem;
+}
+
+.kv-service-lead {
+  display: flex;
+  gap: 6rem;
+}
+
+.kv-service-lead h2 {
+  width: 420px;
+  margin: 0;
+  font-size: clamp(4rem, 5vw, 6.4rem);
+  line-height: .98;
+  white-space: nowrap;
+}
+
+.kv-service-lead > div {
+  width: 250px;
+  color: rgba(255,255,255,.62);
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.kv-card {
+  width: 270px;
+  flex: 0 0 270px;
+  padding-left: 30px;
+  border-left: 1px solid rgba(255,255,255,.12);
+}
+
+.kv-card svg {
+  width: 38px;
+  height: 38px;
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.4;
+}
+
+.kv-card h3 {
+  margin: 22px 0 14px;
+  color: #fff;
+  font-size: 2.6rem;
+  line-height: 1.05;
+}
+
+.kv-card h3 span {
+  display: block;
+}
+
+.kv-card p {
+  color: rgba(255,255,255,.72);
+  font-size: 1.24rem;
+  line-height: 1.5;
+}
+
+.kv-services-pill {
+  display: block;
+  width: max-content;
+  margin: 48px auto 0;
+  padding: 11px 22px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 999px;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .kv-hwrap {
+    height: auto;
+  }
+
+  .kv-hero {
+    position: relative;
+    min-height: 100svh;
+    height: auto;
+  }
+
+  .kv-hero-copy {
+    min-height: 100svh;
+    padding: 22px;
+  }
+
+  .kv-mark {
+    width: 120px;
+  }
+
+  .kv-nav {
+    top: 25px;
+    right: 22px;
+    left: auto;
+    gap: 10px;
+  }
+
+  .kv-nav a {
+    font-size: .95rem;
+  }
+
+  .kv-copy {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    padding-top: clamp(70px, 12vh, 105px);
+  }
+
+  .kv-copy h1 {
+    max-width: 90%;
+    font-size: min(21vw, 8rem);
+  }
+
+  .kv-lede {
+    max-width: 320px;
+    font-size: 1.4rem;
+  }
+
+  .kv-globe-wrap {
+    top: 35%;
+    height: 65%;
+    mask-image: linear-gradient(#000 65%, transparent);
+  }
+
+  .kv-stats {
+    display: block;
+    min-height: 0;
+    padding: 56px 22px 72px;
+  }
+
+  .kv-stats-pin {
+    position: static;
+    height: auto;
+    padding: 0;
+  }
+
+  .kv-photo {
+    width: 100%;
+  }
+
+  .kv-stats-pin h2 {
+    margin-top: 48px;
+    font-size: min(15.5vw, 8rem);
+  }
+
+  .kv-stats-scroll {
+    padding-top: 28px;
+  }
+
+  .kv-numbers {
+    margin: 44px 0 0;
+  }
+
+  .kv-track {
+    height: 360vh;
+  }
+
+  .kv-scene {
+    min-height: 100svh;
+  }
+
+  .kv-video {
+    width: 155vw;
+    max-width: none;
+    left: -28vw;
+    object-fit: cover;
+  }
+
+  .kv-service-band {
+    top: 58%;
+    padding: 44px 22px 28px;
+  }
+
+  .kv-service-strip {
+    gap: 56px;
+  }
+
+  .kv-service-lead {
+    display: block;
+  }
+
+  .kv-service-lead h2 {
+    width: 300px;
+    font-size: 4.6rem;
+    white-space: normal;
+  }
+
+  .kv-service-lead > div {
+    width: 300px;
+    margin-top: 20px;
+  }
+
+  .kv-card {
+    width: 250px;
+    flex-basis: 250px;
+  }
+}
+
+@media (max-width: 767px) and (orientation: landscape) {
+  .kv-hero {
+    min-height: 100svh;
+  }
+
+  .kv-hero-copy {
+    min-height: 100svh;
+    padding-top: 16px;
+  }
+
+  .kv-copy {
+    padding-top: 45px;
+  }
+
+  .kv-copy h1 {
+    font-size: min(14vw, 6rem);
+  }
+
+  .kv-lede {
+    max-width: 390px;
+    margin: 12px 0;
+  }
+
+  .kv-globe-wrap {
+    top: 28%;
+    height: 72%;
   }
 }
 

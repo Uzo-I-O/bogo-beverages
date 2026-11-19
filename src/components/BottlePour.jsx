@@ -39,8 +39,9 @@ export default function BottlePour() {
   useLayoutEffect(() => {
     const layer = layerRef.current;
     const main = layer?.closest("main");
+    const aboutSection = main?.querySelector(".about");
     const statsSection = main?.querySelector(".stats");
-    if (!layer || !main || !statsSection) return undefined;
+    if (!layer || !main || !aboutSection || !statsSection) return undefined;
 
     const liquid = layer.querySelector(".pour-liquid");
     const waveFront = layer.querySelector(".pour-wave--front");
@@ -50,9 +51,8 @@ export default function BottlePour() {
     const sweep = layer.querySelector(".pour-sweep");
     const sweepBar = layer.querySelector(".pour-sweep-bar");
     const halo = layer.querySelector(".pour-halo");
-    const bottleStage = layer.querySelector(".bottle-bg-stage");
-
     const mm = gsap.matchMedia();
+    gsap.set(layer, { autoAlpha: 0 });
 
     mm.add("(prefers-reduced-motion: reduce)", () => {
       gsap.set(liquid, { y: 0 });
@@ -110,22 +110,14 @@ export default function BottlePour() {
       const timeline = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
-          trigger: main,
-          start: "top top",
-          end: () => {
-            const mainTop =
-              main.getBoundingClientRect().top + window.scrollY;
-            const statsBottom =
-              statsSection.getBoundingClientRect().bottom + window.scrollY;
-            const bottleBottom = bottleStage.getBoundingClientRect().bottom;
-
-            return `+=${Math.max(
-              statsBottom - bottleBottom - mainTop,
-              1
-            )}`;
-          },
+          trigger: aboutSection,
+          start: "top bottom",
+          endTrigger: statsSection,
+          end: "bottom bottom",
           scrub: true,
           invalidateOnRefresh: true,
+          onEnter: () => gsap.to(layer, { autoAlpha: 1, duration: 0.25 }),
+          onLeaveBack: () => gsap.to(layer, { autoAlpha: 0, duration: 0.25 }),
           onUpdate: (self) => {
             layer.style.setProperty(
               "--pour-progress",
@@ -136,9 +128,7 @@ export default function BottlePour() {
             slosh.target =
               1 + Math.min(Math.abs(self.getVelocity()) / 4200, 0.4);
           },
-          onLeave: () => {
-            gsap.to(layer, { autoAlpha: 0, duration: 0.25, overwrite: true });
-          },
+          onLeave: () => gsap.to(layer, { autoAlpha: 0, duration: 0.25, overwrite: true }),
           onEnterBack: () => {
             gsap.to(layer, { autoAlpha: 1, duration: 0.25, overwrite: true });
           },
